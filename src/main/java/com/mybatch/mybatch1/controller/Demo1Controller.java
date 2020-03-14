@@ -1,4 +1,4 @@
-package com.mydemo.demo1.controller;
+package com.mybatch.mybatch1.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.DefaultResourceLoader;

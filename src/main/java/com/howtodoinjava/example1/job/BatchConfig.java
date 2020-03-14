@@ -1,4 +1,4 @@
-package com.howtodoinjava.demo1.job;
+package com.howtodoinjava.example1.job;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;

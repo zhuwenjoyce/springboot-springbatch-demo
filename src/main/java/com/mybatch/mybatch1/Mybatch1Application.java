@@ -1,4 +1,4 @@
-package com.mydemo.demo1;
+package com.mybatch.mybatch1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +10,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.io.FileNotFoundException;
 
 @SpringBootApplication
-public class Demo1Application {
+public class Mybatch1Application {
 	
-	private static Logger logger = LoggerFactory.getLogger(Demo1Application.class);
+	private static Logger logger = LoggerFactory.getLogger(Mybatch1Application.class);
 
 	public static void main(String[] args) throws FileNotFoundException {
-		ConfigurableApplicationContext applicationContext = SpringApplication.run(Demo1Application.class, args);
-		logger.info("demo 1 SpringBoot 启动成功！");
+		ConfigurableApplicationContext applicationContext = SpringApplication.run(Mybatch1Application.class, args);
+		logger.info("mybatch 1 SpringBoot 启动成功！");
 
 		SimpleJobLauncher jobLaunch = (SimpleJobLauncher) applicationContext.getBean(SimpleJobLauncher.class);
 		if(null != jobLaunch){

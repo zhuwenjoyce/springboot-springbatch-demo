@@ -1,4 +1,4 @@
-package com.mydemo.demo2.job;
+package com.mybatch.mybatch2.job;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

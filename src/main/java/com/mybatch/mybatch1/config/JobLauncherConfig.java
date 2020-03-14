@@ -1,4 +1,4 @@
-package com.mydemo.demo1.config;
+package com.mybatch.mybatch1.config;
 
 import org.springframework.batch.core.configuration.support.MapJobRegistry;
 import org.springframework.batch.core.explore.support.SimpleJobExplorer;

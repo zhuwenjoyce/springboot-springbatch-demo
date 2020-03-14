@@ -1,4 +1,4 @@
-package com.howtodoinjava.demo1;
+package com.howtodoinjava.example1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +17,9 @@ import org.springframework.context.annotation.ComponentScan;
  * 例子来源参考： https://howtodoinjava.com/spring-batch/java-config-multiple-steps/   Spring Batch – Java Config
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.howtodoinjava.global", "com.howtodoinjava.demo1"})
-public class Demo1Application implements CommandLineRunner {
-    private static Logger logger = LoggerFactory.getLogger(Demo1Application.class);
+@ComponentScan(basePackages = {"com.howtodoinjava.global", "com.howtodoinjava.example1"})
+public class Example1Application implements CommandLineRunner {
+    private static Logger logger = LoggerFactory.getLogger(Example1Application.class);
     @Autowired
     JobLauncher jobLauncher;
 
@@ -27,8 +27,8 @@ public class Demo1Application implements CommandLineRunner {
     Job job;
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext applicationContext = SpringApplication.run(Demo1Application.class, args);
-        logger.info("demo 3 SpringBoot 启动成功！");
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(Example1Application.class, args);
+        logger.info("example 1 SpringBoot 启动成功！");
     }
 
     @Override

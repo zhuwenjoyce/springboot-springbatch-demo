@@ -1,0 +1,5 @@
+com.official.demo1 例子来自于：
+spring-batch-samples/src/main/resources/jobs/adhocLoopJob.xml
+
+SpringBatch官网github地址：
+https://github.com/spring-projects/spring-batch
