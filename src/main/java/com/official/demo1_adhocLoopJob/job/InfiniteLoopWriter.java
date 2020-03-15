@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.official.demo1.job;
+package com.official.demo1_adhocLoopJob.job;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -1,4 +1,4 @@
-package com.official.demo1;
+package com.official.demo1_adhocLoopJob;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 注意！！！job一旦@Bean生成spring实例，就会自动运行！
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.global", "com.official.demo1"})
+@ComponentScan(basePackages = {"com.global", "com.official.demo1_adhocLoopJob"})
 public class Demo1Application {
     private static Logger logger = LoggerFactory.getLogger(Demo1Application.class);
 

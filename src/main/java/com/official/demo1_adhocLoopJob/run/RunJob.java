@@ -1,8 +1,8 @@
-package com.official.demo1.run;
+package com.official.demo1_adhocLoopJob.run;
 
 import com.howtodoinjava.example1.run.ConfigJob;
-import com.official.demo1.job.InfiniteLoopReader;
-import com.official.demo1.job.InfiniteLoopWriter;
+import com.official.demo1_adhocLoopJob.job.InfiniteLoopReader;
+import com.official.demo1_adhocLoopJob.job.InfiniteLoopWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
