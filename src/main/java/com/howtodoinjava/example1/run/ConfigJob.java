@@ -1,5 +1,7 @@
-package com.howtodoinjava.example1.job;
+package com.howtodoinjava.example1.run;
 
+import com.howtodoinjava.example1.job.MyTaskOne;
+import com.howtodoinjava.example1.job.MyTaskTwo;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -13,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableBatchProcessing
-public class BatchConfig {
+public class ConfigJob {
     @Autowired
     private JobBuilderFactory jobs;
 
@@ -34,8 +36,14 @@ public class BatchConfig {
                 .build();
     }
 
+    /**
+     * job一旦注册为bean，SpringBatch框架会自动运行这个job，如果再使用jobLauncher.run(job, params);方式启动job，就会导致job被重复调用
+     * @param step1
+     * @param step2
+     * @return
+     */
     @Bean
-    public Job demoJob(@Qualifier("step1") Step step1,@Qualifier("step2") Step step2 ){
+    public Job demoJob(@Qualifier("step1") Step step1, @Qualifier("step2") Step step2 ){
         return jobs.get("demoJob")
                 .incrementer(new RunIdIncrementer())
                 .start(step1)
