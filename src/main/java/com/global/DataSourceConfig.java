@@ -1,4 +1,4 @@
-package com.howtodoinjava.global;
+package com.global;
 
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;

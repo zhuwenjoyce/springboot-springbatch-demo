@@ -1,5 +1,6 @@
 package com.official.demo1.run;
 
+import com.howtodoinjava.example1.run.ConfigJob;
 import com.official.demo1.job.InfiniteLoopReader;
 import com.official.demo1.job.InfiniteLoopWriter;
 import org.slf4j.Logger;
@@ -22,7 +23,7 @@ import java.util.UUID;
 @Configuration
 @EnableBatchProcessing //可自动注入对象：jobBuilderFactory、stepBuilderFactory、jobLauncher
 @Component
-public class ConfigJob {
+public class RunJob {
 
     private static Logger logger = LoggerFactory.getLogger(ConfigJob.class);
     @Autowired

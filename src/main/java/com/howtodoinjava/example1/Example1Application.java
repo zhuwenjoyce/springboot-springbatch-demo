@@ -14,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 我去掉了例子中的启动类实现了CommandLineRunner这个类，因为 job一旦@Bean生成spring实例，就会自动运行
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.howtodoinjava.global", "com.howtodoinjava.example1"})
+@ComponentScan(basePackages = {"com.global", "com.howtodoinjava.example1"})
 public class Example1Application {
     private static Logger logger = LoggerFactory.getLogger(Example1Application.class);
     @Autowired

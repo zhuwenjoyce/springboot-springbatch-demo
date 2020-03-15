@@ -19,7 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 注意！！！job一旦@Bean生成spring实例，就会自动运行！
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.official.global", "com.official.demo1"})
+@ComponentScan(basePackages = {"com.global", "com.official.demo1"})
 public class Demo1Application {
     private static Logger logger = LoggerFactory.getLogger(Demo1Application.class);
 
