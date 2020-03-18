@@ -27,5 +27,17 @@ public class Demo2Application {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Demo2Application.class, args);
         logger.info("demo 2 SpringBoot 启动成功！");
     }
+    /*
+    console will print:
+
+    INFO  c.h.example1.run.ConfigJob - job[beanWrapperMapperJob-9b06c769c5794503afcf629b031caf1d]开始执行了。
+    INFO  o.s.b.c.l.support.SimpleJobLauncher - Job: [SimpleJob: [name=beanWrapperMapperJob-9b06c769c5794503afcf629b031caf1d]] launched with the following parameters: [{run.id=1}]
+    INFO  o.s.batch.core.job.SimpleStepHandler - Executing step: [taskletStepName1]
+    INFO  o.s.batch.core.step.AbstractStep - Step: [taskletStepName1] executed in 49ms
+    INFO  o.s.batch.core.job.SimpleStepHandler - Executing step: [taskletStepName2]
+    INFO  o.s.batch.core.step.AbstractStep - Step: [taskletStepName2] executed in 14ms
+    INFO  o.s.b.c.l.support.SimpleJobLauncher - Job: [SimpleJob: [name=beanWrapperMapperJob-9b06c769c5794503afcf629b031caf1d]] completed with the following parameters: [{run.id=1}] and the following status: [COMPLETED] in 84ms
+    INFO  c.o.d.Demo2Application - demo 2 SpringBoot 启动成功！
+     */
 
 }

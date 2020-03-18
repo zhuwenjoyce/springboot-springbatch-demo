@@ -1,9 +1,10 @@
 package com.official.demo2_beanWrapperMapperSampleJob.run;
 
 import com.howtodoinjava.example1.run.ConfigJob;
-import com.official.demo1_adhocLoopJob.job.InfiniteLoopWriter;
+import com.official.demo2_beanWrapperMapperSampleJob.domain.Trade;
 import com.official.demo2_beanWrapperMapperSampleJob.job.JdbcTradeDao;
 import com.official.demo2_beanWrapperMapperSampleJob.job.TradeValidator;
+import com.official.demo2_beanWrapperMapperSampleJob.job.TradeWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Step;
@@ -11,6 +12,7 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
@@ -20,8 +22,10 @@ import org.springframework.batch.item.validator.SpringValidator;
 import org.springframework.batch.item.validator.ValidatingItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -43,9 +47,6 @@ public class BuildStep1 {
     @Autowired
     private JobLauncher jobLauncher;
 
-    @Qualifier("dataSource")
-    DataSource dataSource;
-
     @Bean("fixedValidator")
     public SpringValidator getSpringValidator(){
         SpringValidator validator = new SpringValidator();
@@ -61,7 +62,7 @@ public class BuildStep1 {
     @Bean("tradeTokenizer")
     public FixedLengthTokenizer getFixedLengthTokenizer(){
         FixedLengthTokenizer tokenizer = new FixedLengthTokenizer();
-        tokenizer.setNames("ISIN,Quantity,price, CUSTOMER");
+        tokenizer.setNames("ISIN","Quantity","price","CUSTOMER");
         tokenizer.setColumns(
                 new Range(1,12)
                 ,new Range(13,15)
@@ -69,6 +70,12 @@ public class BuildStep1 {
                 ,new Range(21,29)
         );
         return tokenizer;
+    }
+
+    @Bean("trade")
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE) // ==  scope="prototype"
+    public Trade getTrade(){
+        return new Trade();
     }
 
     @Bean("tradeFieldSetMapper")
@@ -86,7 +93,7 @@ public class BuildStep1 {
         FlatFileItemReader reader = new FlatFileItemReader();
 
         ResourceLoader resourceLoader = new DefaultResourceLoader();
-        Resource inputFile = resourceLoader.getResource("input/demo2_beanWrapperMapperJob/20070122.teststream.ImportTradeDataStep.txt");
+        Resource inputFile = resourceLoader.getResource("data/demo2_beanWrapperMapperJob/20070122.teststream.ImportTradeDataStep.txt");
         reader.setResource(inputFile);
 
         DefaultLineMapper lineMapper = new DefaultLineMapper();
@@ -98,24 +105,35 @@ public class BuildStep1 {
     }
 
     @Bean("tradeDao")
-    public JdbcTradeDao getJdbcTradeDao(){
+    public JdbcTradeDao getJdbcTradeDao(
+            @Qualifier("dataSource") DataSource dataSource){
         JdbcTradeDao tradeDao = new JdbcTradeDao();
         tradeDao.setDataSource(dataSource);
         OracleSequenceMaxValueIncrementer oracleSequenceMaxValueIncrementer = new OracleSequenceMaxValueIncrementer();
         oracleSequenceMaxValueIncrementer.setIncrementerName("TRADE_SEQ"); // TRADE_SEQ reference src/main/resources/init-sql/init-demo2.sql
+        oracleSequenceMaxValueIncrementer.setDataSource(dataSource);
         tradeDao.setIncrementer(oracleSequenceMaxValueIncrementer);
         return tradeDao;
     }
 
+    @Bean("tradeWriter")
+    public TradeWriter getTradeWriter(@Qualifier("tradeDao") JdbcTradeDao tradeDao){
+        TradeWriter writer = new TradeWriter();
+        writer.setDao(tradeDao);
+        return writer;
+    }
+
     @Bean("step1")
     public Step getStep1(@Qualifier("tradeFileItemReader") FlatFileItemReader tradeFileItemReader
-            ,@Qualifier("writer") InfiniteLoopWriter writer
+            ,@Qualifier("tradeWriter") TradeWriter tradeWriter
             ,@Qualifier("processor") ValidatingItemProcessor processor) {
-        return this.stepBuilderFactory.get("step")
+        TaskletStep step = stepBuilderFactory.get("step")
                 .chunk(1) // 这里的chunkSize 就是 commit-interval <chunk reader="reader" writer="writer" commit-interval="5"/>
                 .reader(tradeFileItemReader)
-                .writer(writer)
                 .processor(processor)
+                .writer(tradeWriter)
                 .build();
+        step.setName("taskletStepName1");
+        return step;
     }
 }

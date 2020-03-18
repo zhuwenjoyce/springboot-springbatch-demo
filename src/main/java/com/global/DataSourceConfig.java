@@ -9,12 +9,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.interceptor.*;
 
 import javax.sql.DataSource;
 import java.util.*;
 
+@Component
 @Configuration
 public class DataSourceConfig {
 

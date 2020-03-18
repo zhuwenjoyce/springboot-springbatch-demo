@@ -47,6 +47,7 @@ public class RunJob {
         */
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         String jobName = "beanWrapperMapperJob-" + uuid;
+        logger.info("job["+jobName+"]开始执行了。");
         return jobBuilderFactory.get(jobName)
                 .incrementer(new RunIdIncrementer())
                 .start(step1)
