@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * SpringBatch官网github地址：
  * https://github.com/spring-projects/spring-batch
  *
- * com.official.demo1 例子来自于：
+ * demo2 例子来自于：
  * spring-batch-samples/src/main/resources/jobs/beanWrapperMapperSampleJob.xml
  *  我稍微改良了下
  *
