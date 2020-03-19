@@ -1,0 +1,5 @@
+demo1:
+只要com.official.demo1_adhocLoopJob.job.InfiniteLoopReader能一直read到值，RunJob的@Bean("myjob")就能一直跑。
+demo2:
+定义一个start step和next step
+demo3:

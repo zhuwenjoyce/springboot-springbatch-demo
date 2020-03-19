@@ -1,1 +1,0 @@
-drop SEQUENCE TRADE_SEQ;

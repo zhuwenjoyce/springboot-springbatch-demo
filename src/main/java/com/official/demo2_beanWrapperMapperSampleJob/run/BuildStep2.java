@@ -77,7 +77,7 @@ public class BuildStep2 {
     ){
         FlatFileItemReader reader = new FlatFileItemReader();
         ResourceLoader resourceLoader = new DefaultResourceLoader();
-        Resource inputFile = resourceLoader.getResource("data/demo2_beanWrapperMapperJob/20070122.teststream.ImportPersonDataStep.txt");
+        Resource inputFile = resourceLoader.getResource("data/demo2/20070122.teststream.ImportPersonDataStep.txt");
         reader.setResource(inputFile);
         DefaultLineMapper lineMapper = new DefaultLineMapper();
         lineMapper.setLineTokenizer(personTokenizer);
