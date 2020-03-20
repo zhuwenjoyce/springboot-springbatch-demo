@@ -3,6 +3,7 @@ package com.official.demo1_adhocLoopJob.run;
 import com.howtodoinjava.example1.run.ConfigJob;
 import com.official.demo1_adhocLoopJob.job.InfiniteLoopReader;
 import com.official.demo1_adhocLoopJob.job.InfiniteLoopWriter;
+import com.official.demo1_adhocLoopJob.job.MyTasklet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -12,6 +13,10 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.step.builder.SimpleStepBuilder;
+import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.builder.TaskletStepBuilder;
+import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -45,11 +50,27 @@ public class RunJob {
 
     @Bean("step1")
     public Step step(@Qualifier("reader") InfiniteLoopReader reader,@Qualifier("writer") InfiniteLoopWriter writer) {
-        return this.stepBuilderFactory.get("step")
+        // unused
+        StepBuilder stepBuilder = stepBuilderFactory.get("deleteFilesStep");
+        TaskletStepBuilder taskletStepBuilder = stepBuilder.tasklet(new MyTasklet());
+        TaskletStep taskletStep = taskletStepBuilder.build();
+
+        // unused
+        TaskletStep taskletStep1 = stepBuilderFactory.get("step")
                 .chunk(1) // 这里的chunkSize 就是 commit-interval <chunk reader="reader" writer="writer" commit-interval="5"/>
                 .reader(reader)
                 .writer(writer)
                 .build();
+
+        StepBuilder stepBuilder2 = stepBuilderFactory.get("step");
+        SimpleStepBuilder simpleStepBuilder = stepBuilder2.chunk(1);
+        simpleStepBuilder.reader(reader);
+        simpleStepBuilder.writer(writer);
+        TaskletStep taskletStep2 = simpleStepBuilder.build();
+        taskletStep2.setTasklet(new MyTasklet());
+        taskletStep2.setName("taskletStepNameABC");
+
+        return taskletStep2;
     }
 
     /**
