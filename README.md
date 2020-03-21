@@ -47,6 +47,12 @@ The order of execution is: listener, reader, processor, writer.<br/>
 If the processor determines that the condition is met, the item object is returned normally, otherwise null is returned. If null is returned, it is not executed in the writer. Writer is responsible for storing data to Oracle.
 <br/>
 
+### com.official.demo5
+reader和writer可以在用自定义类里的指定方法去实现。
+<br/>
+**English:** reader and writer can be use custom class and method.
+<br/>
+
 
 
 

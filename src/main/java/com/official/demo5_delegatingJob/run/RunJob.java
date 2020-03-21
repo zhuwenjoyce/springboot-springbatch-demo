@@ -1,9 +1,6 @@
-package com.official.demo1_adhocLoopJob.run;
+package com.official.demo5_delegatingJob.run;
 
 import com.howtodoinjava.example1.run.ConfigJob;
-import com.official.demo1_adhocLoopJob.job.InfiniteLoopReader;
-import com.official.demo1_adhocLoopJob.job.InfiniteLoopWriter;
-import com.official.demo1_adhocLoopJob.job.MyTasklet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -16,10 +13,6 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.builder.SimpleJobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.core.step.builder.SimpleStepBuilder;
-import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.core.step.builder.TaskletStepBuilder;
-import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -41,54 +34,13 @@ public class RunJob {
     @Autowired
     private JobLauncher jobLauncher;
 
-    @Bean("reader")
-    public InfiniteLoopReader getInfiniteLoopReader(){
-        return new InfiniteLoopReader();
-    }
-
-    @Bean("writer")
-    public InfiniteLoopWriter getInfiniteLoopWriter(){
-        return new InfiniteLoopWriter();
-    }
-
-    @Bean("step1")
-    public Step step(@Qualifier("reader") InfiniteLoopReader reader,@Qualifier("writer") InfiniteLoopWriter writer) {
-        // unused
-        StepBuilder stepBuilder = stepBuilderFactory.get("deleteFilesStep");
-        TaskletStepBuilder taskletStepBuilder = stepBuilder.tasklet(new MyTasklet());
-        TaskletStep taskletStep = taskletStepBuilder.build();
-
-        // unused
-        TaskletStep taskletStep1 = stepBuilderFactory.get("step")
-                .chunk(1) // 这里的chunkSize 就是 commit-interval <chunk reader="reader" writer="writer" commit-interval="5"/>
-                .reader(reader)
-                .writer(writer)
-                .build();
-
-        StepBuilder stepBuilder2 = stepBuilderFactory.get("step");
-        SimpleStepBuilder simpleStepBuilder = stepBuilder2.chunk(1);
-        simpleStepBuilder.reader(reader);
-        simpleStepBuilder.writer(writer);
-        TaskletStep taskletStep2 = simpleStepBuilder.build();
-        taskletStep2.setTasklet(new MyTasklet());
-        taskletStep2.setName("taskletStepNameABC");
-
-        return taskletStep2;
-    }
-
     /**
      * 注意！！！job一旦@Bean生成spring实例，就会自动运行！
      * @param step1
      * @return
      */
-    @Bean("myjob")
+    @Bean("delegateJob")
     public Job job(@Qualifier("step1") Step step1) {
-        // unused
-        Job job = jobBuilderFactory.get("jobName")
-                .incrementer(new RunIdIncrementer())
-                .start(step1)
-                .build();
-
         /*
        这里的jobName设置为随机，是因为第一次job如果是意外结束状态为running，第二次启动job就会报错：
        org.springframework.batch.core.repository.JobExecutionAlreadyRunningException:
@@ -97,7 +49,7 @@ public class RunJob {
         解决方法是：调用schema-truncate-oracle10g.sql清空所有的SpringBatch表
         */
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
-        String jobName = "loopJob-" + uuid;
+        String jobName = "customerFilterJob-" + uuid;
 
         JobBuilder jobBuilder = jobBuilderFactory.get(jobName);
         jobBuilder.incrementer(new RunIdIncrementer());
