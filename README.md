@@ -1,7 +1,12 @@
 # springboot-springBatch-demo
-springboot 2.2.5.RELEASE + springbatch ( spring-boot-starter-batch 2.2.5.RELEASE ).
++ springboot 2.2.5.RELEASE 
++ springbatch ( spring-boot-starter-batch 2.2.5.RELEASE )
++ Oracle 10g+
++ Maven 3.5.3+
 <br/>
 
+**Note:** 此项目包含SpringBatch官网所有的demo
+<br/>
 **Note:** This project will contains all demo of SpringBatch official example (sub-project spring-batch-samples): <br/>
  https://github.com/spring-projects/spring-batch  <br/>
 But I did change Gradle to Maven, yes, this is **maven project**.
@@ -31,7 +36,19 @@ Job有一个reader和3个writer。<br/>
  so you can customer these writers, one writer store to DB, one writer generate report1.txt, one writer generate report2.txt
 <br/>
 
+### com.official.demo4
+Job有listener、reader、processor、writer。<br/>
+执行顺序依次是：listener、reader、processor、writer。<br/>
+如果processor判断符合条件，则正常返回item对象，否则返回null。如果返回null，则不进入下一步writer里执行。writer负责将数据存储到Oracle.
+<br/>
+
+<br/>
+**English:** Job have reader、processor、writer、listener.<br/>
+The order of execution is: listener, reader, processor, writer.<br/>
+If the processor determines that the condition is met, the item object is returned normally, otherwise null is returned. If null is returned, it is not executed in the writer. Writer is responsible for storing data to Oracle.
+<br/>
 
 
 
-    $ end...
+
+    $ end

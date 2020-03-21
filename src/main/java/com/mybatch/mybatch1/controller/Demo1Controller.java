@@ -18,7 +18,7 @@ public class Demo1Controller {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    @Value("classpath:logback-spring.xml")
+    @Value("classpath:logback-spring.xml.backup")
     private Resource logbackResourceFile;
 
     @RequestMapping("/demo1/file/ai-te-value/logback")
@@ -33,7 +33,7 @@ public class Demo1Controller {
     @RequestMapping("/demo1/file/ResourceLoader/logback")
     public Map getLogbackFileByResourceLoader() throws IOException {
         ResourceLoader resourceLoader = new DefaultResourceLoader();
-        Resource logbackFile = resourceLoader.getResource("logback-spring.xml");
+        Resource logbackFile = resourceLoader.getResource("logback-spring.xml.backup");
         Map map = new HashMap();
         map.put("resourceLoader logbackFile",logbackFile.toString());
         map.put("file name",logbackFile.getFile().getName());
