@@ -52,6 +52,12 @@ reader和writer可以在用自定义类里的指定方法去实现。
 **English:** reader and writer can be use custom class and method.
 <br/>
 
+### com.official.demo6
+1个job3个step，每个step有自己的reader和writer，并且可以定义每个step的执行顺序。
+<br/>
+**English:** The job have 3 steps, each step has its own reader and writer, and the execution order of each step can be defined.
+<br/>
+
 
 
 
