@@ -41,7 +41,6 @@ Job有listener、reader、processor、writer。<br/>
 执行顺序依次是：listener、reader、processor、writer。<br/>
 如果processor判断符合条件，则正常返回item对象，否则返回null。如果返回null，则不进入下一步writer里执行。writer负责将数据存储到Oracle.
 <br/>
-
 **English:** Job have reader、processor、writer、listener.<br/>
 The order of execution is: listener, reader, processor, writer.<br/>
 If the processor determines that the condition is met, the item object is returned normally, otherwise null is returned. If null is returned, it is not executed in the writer. Writer is responsible for storing data to Oracle.

@@ -77,6 +77,7 @@ public class DataSourceConfig {
 		txMap.put("update*", requiredTx);
 		txMap.put("delete*", requiredTx);
 		txMap.put("build*", requiredTx);
+		txMap.put("*", requiredTx);
 
 		NameMatchTransactionAttributeSource source = new NameMatchTransactionAttributeSource();
 		source.setNameMap(txMap);
@@ -89,7 +90,7 @@ public class DataSourceConfig {
 		DefaultPointcutAdvisor pointcutAdvisor = new DefaultPointcutAdvisor();
 		pointcutAdvisor.setAdvice(txAdvice);
 		AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-		pointcut.setExpression("execution (* com.joyce.*.service.*.*(..))");
+		pointcut.setExpression("execution (* com.official.*.*.*(..))");
 		pointcutAdvisor.setPointcut(pointcut);
 		return pointcutAdvisor;
 	}
