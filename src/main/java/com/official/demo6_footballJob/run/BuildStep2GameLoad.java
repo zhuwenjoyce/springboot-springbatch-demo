@@ -31,7 +31,7 @@ public class BuildStep2GameLoad {
     private StepBuilderFactory stepBuilderFactory;
 
     @Value("classpath:data/demo6/games-small.csv")
-    private Resource inputFile;
+    private Resource inputResource;
 
     @Bean("gameFileItemReader")
     public FlatFileItemReader getFlatFileItemReader(){
@@ -43,7 +43,7 @@ public class BuildStep2GameLoad {
         lineMapper.setFieldSetMapper(new GameFieldSetMapper());
 
         FlatFileItemReader reader = new FlatFileItemReader();
-        reader.setResource(inputFile);
+        reader.setResource(inputResource);
         reader.setLineMapper(lineMapper);
         return reader;
     }

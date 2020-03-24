@@ -1,0 +1,8 @@
+# next line is a header and should be copied to to output file
+names
+john
+joe
+jane
+Lily
+Joyce
+Marry

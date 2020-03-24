@@ -93,8 +93,8 @@ public class BuildStep1 {
         FlatFileItemReader reader = new FlatFileItemReader();
 
         ResourceLoader resourceLoader = new DefaultResourceLoader();
-        Resource inputFile = resourceLoader.getResource("data/demo2/20070122.teststream.ImportTradeDataStep.txt");
-        reader.setResource(inputFile);
+        Resource inputResource = resourceLoader.getResource("data/demo2/20070122.teststream.ImportTradeDataStep.txt");
+        reader.setResource(inputResource);
 
         DefaultLineMapper lineMapper = new DefaultLineMapper();
         lineMapper.setLineTokenizer(tradeTokenizer);

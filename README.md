@@ -58,6 +58,24 @@ reader和writer可以在用自定义类里的指定方法去实现。
 **English:** The job have 3 steps, each step has its own reader and writer, and the execution order of each step can be defined.
 <br/>
 
+### com.official.demo7
+未完成。
+<br/>
+**English:** unfinished.
+<br/>
+
+### com.official.demo8
+未完成。
+<br/>
+**English:** unfinished.
+<br/>
+
+### com.official.demo9
+定义处理第一行header和最后一行footer的处理类。
+<br/>
+**English:**  header and footer of writer.
+<br/>
+
 
 
 

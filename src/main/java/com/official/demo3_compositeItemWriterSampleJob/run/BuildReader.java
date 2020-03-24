@@ -40,14 +40,14 @@ public class BuildReader {
     }
 
     @Value("classpath:data/demo3/20070122.teststream.ImportTradeDataStep.txt")
-    private Resource inputFile;
+    private Resource inputResource;
 
     @Bean("fileItemReader")
     public FlatFileItemReader getFlatFileItemReader(
             @Qualifier("lineMapper") DefaultLineMapper lineMapper
     ) throws FileNotFoundException {
         FlatFileItemReader reader = new FlatFileItemReader();
-        reader.setResource(inputFile);
+        reader.setResource(inputResource);
         reader.setLineMapper(lineMapper);
         return  reader;
     }

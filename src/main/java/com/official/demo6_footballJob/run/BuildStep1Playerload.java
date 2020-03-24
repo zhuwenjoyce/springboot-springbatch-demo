@@ -35,7 +35,7 @@ public class BuildStep1Playerload {
     private JobLauncher jobLauncher;
 
     @Value("classpath:data/demo6/player-small1.csv")
-    private Resource inputFile;
+    private Resource inputResource;
 
     @Bean("playerFileItemReader")
     public FlatFileItemReader getFlatFileItemReader(){
@@ -47,7 +47,7 @@ public class BuildStep1Playerload {
         lineMapper.setFieldSetMapper(new PlayerFieldSetMapper());
 
         FlatFileItemReader reader = new FlatFileItemReader();
-        reader.setResource(inputFile);
+        reader.setResource(inputResource);
         reader.setLineMapper(lineMapper);
         return reader;
     }
