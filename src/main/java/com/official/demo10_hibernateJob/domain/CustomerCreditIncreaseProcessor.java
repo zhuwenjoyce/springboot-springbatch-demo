@@ -14,31 +14,24 @@
  * limitations under the License.
  */
 
-package com.official.demo1_adhocLoopJob.job;
+package com.official.demo10_hibernateJob.domain;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.lang.Nullable;
 
-import java.util.Random;
+import java.math.BigDecimal;
 
 /**
- * ItemReader implementation that will continually return a new object. It's
- * generally useful for testing interruption.
+ * Increases customer's credit by a fixed amount.
  * 
- * @author Lucas Ward
- * 
+ * @author Robert Kasanicky
  */
-public class InfiniteLoopReader implements ItemReader<Object> {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+public class CustomerCreditIncreaseProcessor implements ItemProcessor<CustomerCredit, CustomerCredit> {
+	public static final BigDecimal FIXED_AMOUNT = new BigDecimal("5");
 
 	@Nullable
 	@Override
-	public Object read() throws Exception {
-		int i = new Random().nextInt(100);
-		String readStr = "read随机数: " + i;
-		logger.info(readStr);
-		return readStr;
+	public CustomerCredit process(CustomerCredit item) throws Exception {
+		return item.increaseCreditBy(FIXED_AMOUNT);
 	}
 }

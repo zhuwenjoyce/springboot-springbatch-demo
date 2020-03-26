@@ -29,7 +29,7 @@ import javax.sql.DataSource;
  *
  */
 public class JdbcPlayerDao implements PlayerDao  {
-    private static Logger logger = LoggerFactory.getLogger(JdbcPlayerDao.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public static final String INSERT_PLAYER =
 			"INSERT into PLAYERS (player_id, last_name, first_name, pos, year_of_birth, year_drafted)" +

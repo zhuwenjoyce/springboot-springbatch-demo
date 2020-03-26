@@ -34,7 +34,7 @@ import org.springframework.lang.Nullable;
  * @since 2.0
  */
 public class CompositeCustomerUpdateLineTokenizer extends StepExecutionListenerSupport implements LineTokenizer {
-	private static Logger logger = LoggerFactory.getLogger(CompositeCustomerUpdateLineTokenizer.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private LineTokenizer customerTokenizer;
 	private LineTokenizer footerTokenizer;

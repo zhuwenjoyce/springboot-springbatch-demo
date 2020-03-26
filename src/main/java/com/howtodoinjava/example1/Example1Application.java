@@ -16,12 +16,12 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.global", "com.howtodoinjava.example1"})
 public class Example1Application {
-    private static Logger logger = LoggerFactory.getLogger(Example1Application.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     JobLauncher jobLauncher;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Example1Application.class, args);
-        logger.info("example 1 SpringBoot 启动成功！");
+        new Example1Application().logger.info("example 1 SpringBoot 启动成功！");
     }
 }

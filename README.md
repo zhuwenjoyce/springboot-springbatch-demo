@@ -8,13 +8,15 @@
 **Note:** 此项目包含SpringBatch官网所有的demo
 <br/>
 **Note:** This project will contains all demo of SpringBatch official example (sub-project spring-batch-samples): <br/>
- https://github.com/spring-projects/spring-batch  <br/>
 But I did change Gradle to Maven, yes, this is **maven project**.
  <br/>
  
-**some demos from :** [https://github.com/spring-projects/spring-batch](https://github.com/spring-projects/spring-batch/tree/master/spring-batch-samples)
+**Spring Batch Official docs :** [https://docs.spring.io/spring-batch/docs/4.2.1.RELEASE/reference/html/index.html](https://docs.spring.io/spring-batch/docs/4.2.1.RELEASE/reference/html/index.html)
+
+**some demos from :** [https://github.com/spring-projects/spring-batch](https://github.com/spring-projects/spring-batch/tree/master/spring-batch-samples) [SpringBatch official example]
 
 **some demos from :** [https://howtodoinjava.com/spring-batch](https://howtodoinjava.com/spring-batch/java-config-multiple-steps/)
+
 <br/><br/>
 ### com.official.demo1
 只要com.official.demo1_adhocLoopJob.job.InfiniteLoopReader能一直read到值，RunJob的@Bean("myjob")就能一直跑。

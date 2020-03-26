@@ -1,6 +1,5 @@
 package com.official.demo2_beanWrapperMapperSampleJob.run;
 
-import com.howtodoinjava.example1.run.ConfigJob;
 import com.official.demo2_beanWrapperMapperSampleJob.domain.Person;
 import com.official.demo2_beanWrapperMapperSampleJob.job.PersonWriter;
 import org.slf4j.Logger;
@@ -33,7 +32,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BuildStep2 {
 
-    private static Logger logger = LoggerFactory.getLogger(ConfigJob.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
     @Autowired

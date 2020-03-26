@@ -1,8 +1,8 @@
 package com.official.demo4_customerFilterJob.run;
 
-import com.howtodoinjava.example1.run.ConfigJob;
 import com.official.demo4_customerFilterJob.dao.JdbcCustomerDao;
-import com.official.demo4_customerFilterJob.domain.*;
+import com.official.demo4_customerFilterJob.domain.CustomerUpdateProcessor;
+import com.official.demo4_customerFilterJob.domain.CustomerUpdateWriter;
 import com.official.demo4_customerFilterJob.listener.CompositeCustomerUpdateLineTokenizer;
 import com.official.demo4_customerFilterJob.log.CommonsLoggingInvalidCustomerLogger;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ import javax.sql.DataSource;
 @Component
 public class BuildStep {
 
-    private static Logger logger = LoggerFactory.getLogger(ConfigJob.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
     @Autowired

@@ -28,7 +28,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import java.util.List;
 
 public class JdbcGameDao extends JdbcDaoSupport implements ItemWriter<Game> {
-	private static Logger logger = LoggerFactory.getLogger(JdbcGameDao.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private SimpleJdbcInsert insertGame;
 

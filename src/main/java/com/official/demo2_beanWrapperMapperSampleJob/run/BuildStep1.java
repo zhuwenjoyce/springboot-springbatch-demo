@@ -1,6 +1,5 @@
 package com.official.demo2_beanWrapperMapperSampleJob.run;
 
-import com.howtodoinjava.example1.run.ConfigJob;
 import com.official.demo2_beanWrapperMapperSampleJob.domain.Trade;
 import com.official.demo2_beanWrapperMapperSampleJob.job.JdbcTradeDao;
 import com.official.demo2_beanWrapperMapperSampleJob.job.TradeValidator;
@@ -39,7 +38,7 @@ import javax.sql.DataSource;
 @Component
 public class BuildStep1 {
 
-    private static Logger logger = LoggerFactory.getLogger(ConfigJob.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
     @Autowired

@@ -16,7 +16,7 @@ import java.util.Date;
 @Component
 public class MyJob1 implements Job {
 
-    private static Logger logger = LoggerFactory.getLogger(MyJob1.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
     @Override

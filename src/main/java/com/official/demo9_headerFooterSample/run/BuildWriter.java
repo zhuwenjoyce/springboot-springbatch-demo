@@ -1,6 +1,5 @@
 package com.official.demo9_headerFooterSample.run;
 
-import com.howtodoinjava.example1.run.ConfigJob;
 import com.official.demo9_headerFooterSample.domain.HeaderCopyCallback;
 import com.official.demo9_headerFooterSample.domain.SummaryFooterCallback;
 import org.slf4j.Logger;
@@ -26,7 +25,7 @@ import java.io.File;
 @Component
 public class BuildWriter {
 
-    private static Logger logger = LoggerFactory.getLogger(ConfigJob.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
     @Autowired

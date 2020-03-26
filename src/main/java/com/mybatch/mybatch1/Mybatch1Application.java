@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.global", "com.mybatch.mybatch1"})
 public class Mybatch1Application {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(Mybatch1Application.class);
 
 	public static void main(String[] args) throws FileNotFoundException {

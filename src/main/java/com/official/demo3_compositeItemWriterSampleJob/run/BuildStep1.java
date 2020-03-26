@@ -1,6 +1,5 @@
 package com.official.demo3_compositeItemWriterSampleJob.run;
 
-import com.howtodoinjava.example1.run.ConfigJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Step;
@@ -23,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BuildStep1 {
 
-    private static Logger logger = LoggerFactory.getLogger(ConfigJob.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
     @Autowired

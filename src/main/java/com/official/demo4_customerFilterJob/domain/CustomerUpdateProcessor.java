@@ -14,7 +14,7 @@ import static com.official.demo4_customerFilterJob.domain.CustomerOperation.*;
  *
  */
 public class CustomerUpdateProcessor implements ItemProcessor<CustomerUpdate, CustomerUpdate> {
-	private static Logger logger = LoggerFactory.getLogger(CustomerUpdateProcessor.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private CustomerDao customerDao;
 	private InvalidCustomerLogger invalidCustomerLogger;

@@ -1,4 +1,4 @@
-package com.official.demo5_delegatingJob.run;
+package com.official.demo10_hibernateJob.run;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,11 +35,12 @@ public class RunJob {
 
     /**
      * 注意！！！job一旦@Bean生成spring实例，就会自动运行！
-     * @param step1
      * @return
      */
-    @Bean("delegateJob")
-    public Job job(@Qualifier("step1") Step step1) {
+    @Bean("hibernateJob")
+    public Job job(
+            @Qualifier("step1") Step step1
+    ) {
         /*
        这里的jobName设置为随机，是因为第一次job如果是意外结束状态为running，第二次启动job就会报错：
        org.springframework.batch.core.repository.JobExecutionAlreadyRunningException:
@@ -48,13 +49,15 @@ public class RunJob {
         解决方法是：调用schema-truncate-oracle10g.sql清空所有的SpringBatch表
         */
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
-        String jobName = "customerFilterJob-" + uuid;
+        String jobName = "hibernateJob-" + uuid;
 
         JobBuilder jobBuilder = jobBuilderFactory.get(jobName);
         jobBuilder.incrementer(new RunIdIncrementer());
-        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(step1);
-        SimpleJob simpleJob = (SimpleJob) simpleJobBuilder.build();
 
+        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(step1);
+
+        SimpleJob simpleJob = (SimpleJob) simpleJobBuilder.build();
+        simpleJob.setName(jobName);
         return simpleJob;
     }
 }

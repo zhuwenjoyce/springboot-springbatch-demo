@@ -28,7 +28,7 @@ import javax.sql.DataSource;
 import java.util.List;
 
 public class JdbcPlayerSummaryDao implements ItemWriter<PlayerSummary> {
-	private static Logger logger = LoggerFactory.getLogger(JdbcPlayerSummaryDao.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private static final String INSERT_SUMMARY = "INSERT into PLAYER_SUMMARY(ID, YEAR_NO, COMPLETES, ATTEMPTS, PASSING_YARDS, PASSING_TD, "
 			+ "INTERCEPTIONS, RUSHES, RUSH_YARDS, RECEPTIONS, RECEPTIONS_YARDS, TOTAL_TD) "

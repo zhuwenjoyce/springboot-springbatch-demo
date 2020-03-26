@@ -8,7 +8,7 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 
 public class MyTasklet implements Tasklet {
-    private static Logger logger = LoggerFactory.getLogger(MyTasklet.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
         logger.info(" MyTasklet 执行了......");

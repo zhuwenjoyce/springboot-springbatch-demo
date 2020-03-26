@@ -1,6 +1,5 @@
 package com.official.demo1_adhocLoopJob.run;
 
-import com.howtodoinjava.example1.run.ConfigJob;
 import com.official.demo1_adhocLoopJob.job.InfiniteLoopReader;
 import com.official.demo1_adhocLoopJob.job.InfiniteLoopWriter;
 import com.official.demo1_adhocLoopJob.job.MyTasklet;
@@ -33,7 +32,7 @@ import java.util.UUID;
 @Component
 public class RunJob {
 
-    private static Logger logger = LoggerFactory.getLogger(ConfigJob.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
     @Autowired

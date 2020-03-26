@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import java.io.FileNotFoundException;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.howtodoinjava.global", "com.mybatch.mybatch2"})
+@ComponentScan(basePackages = {"com.global", "com.mybatch.mybatch2"})
 public class Mybatch2Application {
 
     private static Logger logger = LoggerFactory.getLogger(Mybatch2Application.class);

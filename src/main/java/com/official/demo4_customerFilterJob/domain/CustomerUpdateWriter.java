@@ -28,7 +28,7 @@ import java.util.List;
  *
  */
 public class CustomerUpdateWriter implements ItemWriter<CustomerUpdate> {
-	private static Logger logger = LoggerFactory.getLogger(CustomerUpdateWriter.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private CustomerDao customerDao;
 	

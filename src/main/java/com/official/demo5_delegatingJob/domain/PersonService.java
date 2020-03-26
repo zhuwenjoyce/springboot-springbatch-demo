@@ -31,7 +31,7 @@ import java.util.List;
  * @author Robert Kasanicky
  */
 public class PersonService {
-	private static Logger logger = LoggerFactory.getLogger(PersonService.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private static final int GENERATION_LIMIT = 10;
 
 	private int generatedCounter = 0;

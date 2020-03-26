@@ -23,7 +23,7 @@ import java.util.List;
 
 @Configuration
 public class BuildWriter {
-    private static Logger logger = LoggerFactory.getLogger(BuildWriter.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Value("${file.output.directory}")
     private String fileOutputDirectory;

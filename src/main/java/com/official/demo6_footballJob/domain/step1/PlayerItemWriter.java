@@ -24,7 +24,7 @@ import org.springframework.batch.item.ItemWriter;
 import java.util.List;
 
 public class PlayerItemWriter implements ItemWriter<Player> {
-	private static Logger logger = LoggerFactory.getLogger(PlayerItemWriter.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private PlayerDao playerDao;
 
