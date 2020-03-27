@@ -26,12 +26,17 @@ import java.math.BigDecimal;
  * 
  * @author Robert Kasanicky
  */
-public class CustomerCreditIncreaseProcessor implements ItemProcessor<CustomerCredit, CustomerCredit> {
+public class CustomerCreditIncreaseProcessor implements ItemProcessor<Object[], CustomerCredit> {
 	public static final BigDecimal FIXED_AMOUNT = new BigDecimal("5");
 
 	@Nullable
 	@Override
-	public CustomerCredit process(CustomerCredit item) throws Exception {
-		return item.increaseCreditBy(FIXED_AMOUNT);
+	public CustomerCredit process(Object[] objArr) throws Exception {
+		CustomerCredit credit = new CustomerCredit();
+		credit.setId(Integer.valueOf(objArr[0].toString()));
+		credit.setName(objArr[1].toString());
+		credit.setCredit(new BigDecimal(objArr[2].toString()));
+		return credit;
 	}
+
 }

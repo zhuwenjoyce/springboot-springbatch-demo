@@ -15,11 +15,15 @@
  */
 package com.official.demo10_hibernateJob.domain;
 
+import com.alibaba.fastjson.JSONObject;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.repeat.RepeatContext;
 import org.springframework.batch.repeat.RepeatListener;
 import org.springframework.batch.repeat.RepeatStatus;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +34,7 @@ import java.util.List;
  */
 public class HibernateCreditDao implements
 		CustomerCreditDao, RepeatListener {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private int failOnFlush = -1;
 	private List<Throwable> errors = new ArrayList<>();
@@ -55,15 +60,21 @@ public class HibernateCreditDao implements
 	 */
 	@Override
 	public void writeCredit(CustomerCredit customerCredit) {
+		String name = customerCredit.getName();
+		name = name.substring(0,name.indexOf(":::"));
+		name = name + ":::"+ LocalDateTime.now();
 		if (customerCredit.getId() == failOnFlush) {
 			// try to insert one with a duplicate ID
 			CustomerCredit newCredit = new CustomerCredit();
 			newCredit.setId(customerCredit.getId());
-			newCredit.setName(customerCredit.getName());
+			newCredit.setName(name);
 			newCredit.setCredit(customerCredit.getCredit());
 			sessionFactory.getCurrentSession().save(newCredit);
+			logger.info("================= save CustomerCredit::: " + JSONObject.toJSONString(customerCredit));
 		} else {
+			customerCredit.setName(name);
 			sessionFactory.getCurrentSession().update(customerCredit);
+			logger.info("================= update CustomerCredit::: " + JSONObject.toJSONString(customerCredit));
 		}
 	}
 

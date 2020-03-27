@@ -7,11 +7,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.job.SimpleJob;
-import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.job.builder.SimpleJobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -51,13 +47,15 @@ public class RunJob {
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         String jobName = "hibernateJob-" + uuid;
 
-        JobBuilder jobBuilder = jobBuilderFactory.get(jobName);
-        jobBuilder.incrementer(new RunIdIncrementer());
-
-        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(step1);
-
-        SimpleJob simpleJob = (SimpleJob) simpleJobBuilder.build();
-        simpleJob.setName(jobName);
-        return simpleJob;
+//        JobBuilder jobBuilder = jobBuilderFactory.get(jobName);
+//        jobBuilder.incrementer(new RunIdIncrementer());
+//
+//        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(step1);
+//
+//        SimpleJob simpleJob = (SimpleJob) simpleJobBuilder.build();
+//        simpleJob.setName(jobName);
+        return jobBuilderFactory.get(jobName)
+                .start(step1)
+                .build();
     }
 }

@@ -28,8 +28,11 @@ public class BuildWriter {
     private JobLauncher jobLauncher;
 
     @Bean("customerCreditDao")
-    public HibernateCreditDao getHibernateCreditDao(){
+    public HibernateCreditDao getHibernateCreditDao(
+            @Qualifier("hibernateSessionFactory") LocalSessionFactoryBean hibernateSessionFactory
+    ){
         HibernateCreditDao dao = new HibernateCreditDao();
+        dao.setSessionFactory(hibernateSessionFactory.getObject());
         return dao;
     }
 

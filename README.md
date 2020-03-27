@@ -78,6 +78,11 @@ reader和writer可以在用自定义类里的指定方法去实现。
 **English:**  header and footer of writer.
 <br/>
 
+### com.official.demo9
+集成 hibernate 框架.
+<br/>
+**English:**  Integration hibernate framework.
+<br/>
 
 
 

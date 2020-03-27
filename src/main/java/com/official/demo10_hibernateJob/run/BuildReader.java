@@ -31,8 +31,9 @@ public class BuildReader {
             @Qualifier("hibernateSessionFactory") LocalSessionFactoryBean hibernateSessionFactory
     ){
         HibernateCursorItemReader reader = new HibernateCursorItemReader();
-        reader.setQueryString("from CustomerCredit");
+        reader.setQueryString("select id,name,credit from CustomerCredit");
         reader.setSessionFactory(hibernateSessionFactory.getObject());
+        reader.setFetchSize(1);  // read one record at a time。每次只读取一条
         return reader;
     }
 }

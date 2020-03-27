@@ -9,17 +9,12 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.step.builder.SimpleStepBuilder;
-import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.batch.core.step.tasklet.TaskletStep;
 import org.springframework.batch.item.database.HibernateCursorItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Configuration
 @EnableBatchProcessing //可自动注入对象：jobBuilderFactory、stepBuilderFactory、jobLauncher
@@ -40,18 +35,21 @@ public class BuildStep1 {
             ,@Qualifier("creditIncreaseProcessor") CustomerCreditIncreaseProcessor creditIncreaseProcessor
             ,@Qualifier("hibernateCreditWriter") HibernateAwareCustomerCreditItemWriter hibernateCreditWriter
     ){
-        String uuid = UUID.randomUUID().toString().replaceAll("-","");
-        String jobName = "playerloadStepName-" + uuid;
-        StepBuilder stepBuilder = stepBuilderFactory.get(jobName);
-
-
-        SimpleStepBuilder builder = stepBuilder.chunk(3);
-        builder.reader(hibernateItemReader);
-        builder.processor(creditIncreaseProcessor);
-        builder.writer(hibernateCreditWriter);
-
-        TaskletStep taskletStep = builder.build();
-        return taskletStep;
+        Step step = this.stepBuilderFactory.get("step1")
+                .<String, String>chunk(1)
+                .reader(hibernateItemReader)
+                .processor(creditIncreaseProcessor)
+                .writer(hibernateCreditWriter)
+                .faultTolerant()
+                .skipLimit(5)  // :: skip-limit="5"
+                /*
+                <skippable-exception-classes>
+						<include class="java.lang.RuntimeException"/>
+				</skippable-exception-classes>
+                 */
+                .skip(RuntimeException.class)
+                .build();
+        return step;
     }
 
 }
