@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -73,14 +72,13 @@ public class RunJob {
         */
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         String jobName = "infiniteLoopJob-" + uuid;
-//        return null;
 
         JobBuilder jobBuilder = jobBuilderFactory.get(jobName);
         MyStartJob myStartJob = new MyStartJob();
         SimpleJobBuilder simpleJobBuilder = jobBuilder.start(myStartJob);
 
         GeneratingTradeItemReader itemReader = new GeneratingTradeItemReader();
-        itemReader.setLimit(1000000);
+        itemReader.setLimit(5);
         DummyItemWriter itemWriter = new DummyItemWriter();
 
         FaultTolerantStepFactoryBean infiniteStep = new FaultTolerantStepFactoryBean();
