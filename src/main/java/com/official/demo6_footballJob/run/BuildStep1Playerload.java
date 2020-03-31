@@ -54,7 +54,7 @@ public class BuildStep1Playerload {
 
     @Bean("playerWriter")
     public PlayerItemWriter getPlayerItemWriter(
-            @Qualifier("dataSource") DataSource dataSource
+            @Qualifier("oracleDataSource") DataSource dataSource
     ){
         PlayerItemWriter writer = new PlayerItemWriter();
         JdbcPlayerDao playerDao = new JdbcPlayerDao();

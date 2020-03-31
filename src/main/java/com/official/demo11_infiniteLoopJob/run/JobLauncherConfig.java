@@ -1,4 +1,4 @@
-package com.mybatch.mybatch1.config;
+package com.official.demo11_infiniteLoopJob.run;
 
 import org.springframework.batch.core.configuration.support.MapJobRegistry;
 import org.springframework.batch.core.explore.support.SimpleJobExplorer;
@@ -7,6 +7,7 @@ import org.springframework.batch.core.launch.support.SimpleJobOperator;
 import org.springframework.batch.core.repository.dao.*;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.batch.core.repository.support.SimpleJobRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,28 +25,46 @@ import javax.sql.DataSource;
  */
 @Configuration
 public class JobLauncherConfig {
+    @Autowired
+    @Qualifier("oracleDataSource")
+    private DataSource dataSource;
+
+    @Bean("myOracleSequenceIncrementer")
+    public OracleSequenceMaxValueIncrementer getOracleSequenceMaxValueIncrementer(){
+        OracleSequenceMaxValueIncrementer incrementer = new OracleSequenceMaxValueIncrementer(dataSource,"myOracleSequence"); // see init-sql/init-demo11.sql
+        return incrementer;
+    }
 
     @Bean("jdbcJobInstanceDao")
-    public JdbcJobInstanceDao getJdbcJobInstanceDao(@Qualifier("jdbcTemplate") JdbcTemplate jdbcTemplate){
+    public JdbcJobInstanceDao getJdbcJobInstanceDao(
+            @Qualifier("jdbcTemplate") JdbcTemplate jdbcTemplate
+            ,@Qualifier("myOracleSequenceIncrementer") OracleSequenceMaxValueIncrementer myOracleSequenceIncrementer
+    ){
         JdbcJobInstanceDao jobInstanceDao = new JdbcJobInstanceDao();
         jobInstanceDao.setJdbcTemplate(jdbcTemplate);
-        jobInstanceDao.setJobIncrementer(new OracleSequenceMaxValueIncrementer());
+        jobInstanceDao.setJobIncrementer(myOracleSequenceIncrementer);
         return jobInstanceDao;
     }
 
     @Bean("jdbcJobExecutionDao")
-    public JdbcJobExecutionDao getJdbcJobExecutionDao(@Qualifier("jdbcTemplate") JdbcTemplate jdbcTemplate){
+    public JdbcJobExecutionDao getJdbcJobExecutionDao(
+            @Qualifier("jdbcTemplate") JdbcTemplate jdbcTemplate
+            ,@Qualifier("myOracleSequenceIncrementer") OracleSequenceMaxValueIncrementer myOracleSequenceIncrementer
+    ){
         JdbcJobExecutionDao jobExecutionDao = new JdbcJobExecutionDao();
         jobExecutionDao.setJdbcTemplate(jdbcTemplate);
-        jobExecutionDao.setJobExecutionIncrementer(new OracleSequenceMaxValueIncrementer());
+        jobExecutionDao.setJobExecutionIncrementer(myOracleSequenceIncrementer);
         return jobExecutionDao;
     }
 
     @Bean("jdbcStepExecutionDao")
-    public JdbcStepExecutionDao getJdbcStepExecutionDao(@Qualifier("jdbcTemplate") JdbcTemplate jdbcTemplate){
+    public JdbcStepExecutionDao getJdbcStepExecutionDao(
+            @Qualifier("jdbcTemplate") JdbcTemplate jdbcTemplate
+        ,@Qualifier("myOracleSequenceIncrementer") OracleSequenceMaxValueIncrementer myOracleSequenceIncrementer
+    ){
         JdbcStepExecutionDao stepExecutionDao = new JdbcStepExecutionDao();
         stepExecutionDao.setJdbcTemplate(jdbcTemplate);
-        stepExecutionDao.setStepExecutionIncrementer(new OracleSequenceMaxValueIncrementer());
+        stepExecutionDao.setStepExecutionIncrementer(myOracleSequenceIncrementer);
         return stepExecutionDao;
     }
 

@@ -31,7 +31,7 @@ public class HibernateConfig {
     public String dataSourcePassword;
 
     @SuppressWarnings("rawtypes")
-    @Bean("dataSource")
+    @Bean("oracleDataSource")
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName(dataSourceDriverClassName);
@@ -43,7 +43,7 @@ public class HibernateConfig {
 
     @Bean("hibernateSessionFactory")
     public LocalSessionFactoryBean getLocalSessionFactoryBean(
-            @Qualifier("dataSource") DataSource dataSource
+            @Qualifier("oracleDataSource") DataSource dataSource
     ){
         Properties properties = new Properties();
         properties.setProperty("hibernate.show_sql","true");

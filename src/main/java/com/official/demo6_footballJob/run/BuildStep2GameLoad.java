@@ -50,7 +50,7 @@ public class BuildStep2GameLoad {
 
     @Bean("gameWriter")
     public JdbcGameDao getJdbcGameDao(
-            @Qualifier("dataSource") DataSource dataSource
+            @Qualifier("oracleDataSource") DataSource dataSource
     ){
         JdbcGameDao gameDao = new JdbcGameDao();
         gameDao.setDataSource(dataSource);

@@ -28,7 +28,7 @@ public class BuildStep3PlayerSummarization {
 
     @Bean("playerSummarizationSource")
     public JdbcCursorItemReader getJdbcCursorItemReader(
-            @Qualifier("dataSource") DataSource dataSource
+            @Qualifier("oracleDataSource") DataSource dataSource
     ){
         JdbcCursorItemReader reader = new JdbcCursorItemReader();
         reader.setDataSource(dataSource);
@@ -42,7 +42,7 @@ public class BuildStep3PlayerSummarization {
 
     @Bean("summaryWriter")
     public JdbcPlayerSummaryDao getJdbcPlayerSummaryDao(
-            @Qualifier("dataSource") DataSource dataSource
+            @Qualifier("oracleDataSource") DataSource dataSource
     ){
         JdbcPlayerSummaryDao summaryDao = new JdbcPlayerSummaryDao();
         summaryDao.setDataSource(dataSource);

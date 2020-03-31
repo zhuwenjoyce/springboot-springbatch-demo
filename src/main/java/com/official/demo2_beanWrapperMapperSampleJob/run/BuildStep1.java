@@ -105,7 +105,7 @@ public class BuildStep1 {
 
     @Bean("tradeDao")
     public JdbcTradeDao getJdbcTradeDao(
-            @Qualifier("dataSource") DataSource dataSource){
+            @Qualifier("oracleDataSource") DataSource dataSource){
         JdbcTradeDao tradeDao = new JdbcTradeDao();
         tradeDao.setDataSource(dataSource);
         OracleSequenceMaxValueIncrementer oracleSequenceMaxValueIncrementer = new OracleSequenceMaxValueIncrementer();

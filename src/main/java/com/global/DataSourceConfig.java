@@ -28,19 +28,20 @@ public class DataSourceConfig {
 	public String dataSourcePassword;
 
 	@SuppressWarnings("rawtypes")
-	@Bean("dataSource")
+	@Bean("oracleDataSource")
 	public DataSource getDataSource() {
 		DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
 		dataSourceBuilder.driverClassName(dataSourceDriverClassName);
 		dataSourceBuilder.url(dataSourceUrl);
 		dataSourceBuilder.username(dataSourceUsername);
 		dataSourceBuilder.password(dataSourcePassword);
-		return dataSourceBuilder.build();
+		DataSource dataSource = dataSourceBuilder.build();
+		return dataSource;
 	}
 
 	@Bean("txManager")
 	public DataSourceTransactionManager getDataSourceTransactionManager(
-			@Qualifier("dataSource") DataSource dataSource) {
+			@Qualifier("oracleDataSource") DataSource dataSource) {
 		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
 		transactionManager.setDataSource(dataSource);
 		return transactionManager;
@@ -96,7 +97,7 @@ public class DataSourceConfig {
 	}
 
 	@Bean("jdbcTemplate")
-    public JdbcTemplate getJdbcTemplate(@Qualifier("dataSource") DataSource dataSource){
+    public JdbcTemplate getJdbcTemplate(@Qualifier("oracleDataSource") DataSource dataSource){
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         jdbcTemplate.setDataSource(dataSource);
         return jdbcTemplate;

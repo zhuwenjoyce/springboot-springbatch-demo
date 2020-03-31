@@ -78,10 +78,17 @@ reader和writer可以在用自定义类里的指定方法去实现。
 **English:**  header and footer of writer.
 <br/>
 
-### com.official.demo9
+### com.official.demo10
 集成 hibernate 框架.
 <br/>
 **English:**  Integration hibernate framework.
+<br/>
+
+### com.official.demo11
+演示再无限循环任务情况下，如何优雅地关机。但是我只看出了无限循环，没看出咋优雅关机。
+<br/>
+**English:**  The tasklet used in this job will run in an infinite loop.  This is useful for testing graceful shutdown from
+              		multiple environments..
 <br/>
 
 

@@ -40,7 +40,7 @@ public class BuildStep {
 
     @Bean("customerDao")
     public JdbcCustomerDao getJdbcCustomerDao(
-            @Qualifier("dataSource") DataSource dataSource
+            @Qualifier("oracleDataSource") DataSource dataSource
     ){
         OracleSequenceMaxValueIncrementer oracleIncrementer = new OracleSequenceMaxValueIncrementer();
         oracleIncrementer.setIncrementerName("CUSTOMER_SEQ"); // CUSTOMER_SEQ reference src/main/resources/init-sql/init-demo4.sql
