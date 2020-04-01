@@ -25,7 +25,7 @@ public class Demo12Application {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(Demo12Application.class, args);
-        logger.info("demo 11 SpringBoot 启动成功！");
+        logger.info("demo 12 SpringBoot 启动成功！");
     }
 
 }
