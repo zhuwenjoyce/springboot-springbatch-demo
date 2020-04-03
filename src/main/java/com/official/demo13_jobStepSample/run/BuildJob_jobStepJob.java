@@ -1,6 +1,5 @@
 package com.official.demo13_jobStepSample.run;
 
-import com.official.demo13_jobStepSample.domain.MyStartJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -38,12 +37,9 @@ public class BuildJob_jobStepJob {
         jobStep.setName("jobStepJob.step1");
 
         JobBuilder jobBuilder = jobBuilderFactory.get("jobStepJob");
-        MyStartJob myStartJob = new MyStartJob();
-        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(myStartJob);
+        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(jobStep);
         SimpleJob simpleJob = (SimpleJob) simpleJobBuilder.build();
         simpleJob.setRestartable(true); // 可重复执行job
-
-        simpleJob.addStep(jobStep);
 
         return simpleJob;
     }

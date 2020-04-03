@@ -1,10 +1,9 @@
 package com.official.demo13_jobStepSample.run;
 
-import com.official.demo13_jobStepSample.domain.MyStartJob;
 import com.official.demo13_jobStepSample.domain.JdbcTradeDao;
 import com.official.demo13_jobStepSample.domain.TradeValidator;
 import com.official.demo13_jobStepSample.domain.TradeWriter;
-import com.official.demo3_compositeItemWriterSampleJob.job.TradeFieldSetMapper;
+import com.official.demo13_jobStepSample.domain.TradeFieldSetMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
@@ -52,6 +51,7 @@ public class BuildJob_tradeJob {
             @Qualifier("oracleDataSource") DataSource oracleDataSource
     ){
         OracleSequenceMaxValueIncrementer oracleIncrementer = new OracleSequenceMaxValueIncrementer();
+        oracleIncrementer.setDataSource(oracleDataSource);
         oracleIncrementer.setIncrementerName("TRADE_SEQ"); // TRADE_SEQ reference src/main/resources/init-sql/init-demo13.sql
 
         JdbcTradeDao dao = new JdbcTradeDao();
@@ -159,11 +159,9 @@ public class BuildJob_tradeJob {
         String jobName = "tradeJob";
 
         JobBuilder jobBuilder = jobBuilderFactory.get(jobName);
-        MyStartJob myStartJob = new MyStartJob();
-        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(myStartJob);
+        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(step);
         SimpleJob simpleJob = (SimpleJob) simpleJobBuilder.build();
         simpleJob.setRestartable(true); // 可重复执行job
-        simpleJob.addStep(step);
 
         return simpleJob;
     }

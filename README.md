@@ -85,10 +85,22 @@ reader和writer可以在用自定义类里的指定方法去实现。
 <br/>
 
 ### com.official.demo11
-演示再无限循环任务情况下，如何优雅地关机。但是我只看出了无限循环，没看出咋优雅关机。
+演示在无限循环任务情况下，如何优雅地关机。但是我只看出了无限循环，没看出咋优雅关机。
 <br/>
 **English:**  The tasklet used in this job will run in an infinite loop.  This is useful for testing graceful shutdown from
               		multiple environments..
+<br/>
+
+### com.official.demo12
+这个 ioSampleJob.xml 例子没什么好看的，纯粹是介绍如何在processor中处理东西，略过。。。。
+<br/>
+**English:**  This iosamplejob. XML example is nothing to look at, it's just an introduction to how to process things in a processor, skip...
+<br/>
+
+### com.official.demo13
+job里包含的step里还可以再包含job。
+<br/>
+**English:**  Job container step, which step can container job again.
 <br/>
 
 

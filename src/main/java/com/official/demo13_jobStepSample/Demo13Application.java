@@ -15,7 +15,6 @@ import org.springframework.context.annotation.ComponentScan;
  * this demo 例子来自于：
  * spring-batch-samples/src/main/resources/jobs/jobStepSample.xml
  *
- *
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.global", "com.official.demo13_jobStepSample"})
