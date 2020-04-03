@@ -1,21 +1,17 @@
 package com.official.demo13_jobStepSample.run;
 
 import com.official.demo13_jobStepSample.domain.JdbcTradeDao;
+import com.official.demo13_jobStepSample.domain.TradeFieldSetMapper;
 import com.official.demo13_jobStepSample.domain.TradeValidator;
 import com.official.demo13_jobStepSample.domain.TradeWriter;
-import com.official.demo13_jobStepSample.domain.TradeFieldSetMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.job.SimpleJob;
-import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.job.builder.SimpleJobBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.step.builder.SimpleStepBuilder;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -37,7 +33,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableBatchProcessing //可自动注入对象：jobBuilderFactory、stepBuilderFactory、jobLauncher
-public class BuildJob_tradeJob {
+public class BuildJob {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -136,7 +132,7 @@ public class BuildJob_tradeJob {
     }
 
     @Bean("step1")
-    public Step getStep(
+    public Step getStep1(
             @Qualifier("itemReader") FlatFileItemReader itemReader
             ,@Qualifier("processor") ValidatingItemProcessor processor
             ,@Qualifier("tradeWriter") TradeWriter tradeWriter
@@ -152,17 +148,4 @@ public class BuildJob_tradeJob {
         return taskletStep;
     }
 
-    @Bean("tradeJob")
-    public Job getTradeJob(
-            @Qualifier("step1") Step step
-    ){
-        String jobName = "tradeJob";
-
-        JobBuilder jobBuilder = jobBuilderFactory.get(jobName);
-        SimpleJobBuilder simpleJobBuilder = jobBuilder.start(step);
-        SimpleJob simpleJob = (SimpleJob) simpleJobBuilder.build();
-        simpleJob.setRestartable(true); // 可重复执行job
-
-        return simpleJob;
-    }
 }
