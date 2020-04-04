@@ -113,5 +113,10 @@ job里包含的step里还可以再包含job。
 JobFlowBuilder can build decision and which step, If decision return status as FlowExecutionStatus.CONTINUE, then continue execute step2.
  
 
+### com.official.demo15
+演示了从DB读取数据，到processor组装邮件内容，到writer发送邮件的例子。
+<br/>
+**English:**  This demo read data from DB, and build mail content in processor, and send mail in writer.
+
 
     $ end
