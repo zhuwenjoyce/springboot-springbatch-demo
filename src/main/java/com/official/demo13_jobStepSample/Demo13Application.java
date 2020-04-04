@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
  * spring-batch-samples/src/main/resources/jobs/jobStepSample.xml
  *
  * 本demo注意点：每次执行前，都先执行：init-database-sql/schema-truncate-oracle10g.sql
- * 因为会存在job不能重复启动的问题，好像不是JOB ID重复的问题，目前原因不明
+ * 因为会存在job不能重复启动的问题，所以在run job之前要添加jobParameters，只有每一次的jobParameters的值不一样，job才会再次执行
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.global", "com.official.demo13_jobStepSample"})

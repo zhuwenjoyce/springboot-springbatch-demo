@@ -103,6 +103,15 @@ job里包含的step里还可以再包含job。
 **English:**  Job container step, which step can container job again.
 <br/>
 
+### com.official.demo14
+先执行监听器GeneratingTradeResettingListener,再执行决策者LimitDecider。
+<br/>
+在JobFlowBuilder里设置根据决策者返回什么状态（比如FlowExecutionStatus.COMPLETED）再决定跳转到哪个step执行，或者终止job。
+<br/>
+**English:**  First perform listener GeneratingTradeResettingListener, then execute decision(LimitDecider).
+<br/>
+JobFlowBuilder can build decision and which step, If decision return status as FlowExecutionStatus.CONTINUE, then continue execute step2.
+ 
 
 
     $ end
