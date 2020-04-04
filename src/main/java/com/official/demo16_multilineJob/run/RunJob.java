@@ -1,4 +1,4 @@
-package com.official.demo15_mailJob.run;
+package com.official.demo16_multilineJob.run;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class RunJob {
                     .addLong("time", System.currentTimeMillis())
                     .toJobParameters();
 
-        SimpleJob job = (SimpleJob) this.jobBuilderFactory.get("mailJob")
+        SimpleJob job = (SimpleJob) this.jobBuilderFactory.get("multilineJob")
                     .start(taskletStep).build(); // 流程逻辑设置结束
         job.setRestartable(true);
         jobLauncher.run(job,jobParameters);

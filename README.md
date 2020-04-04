@@ -119,4 +119,16 @@ JobFlowBuilder can build decision and which step, If decision return status as F
 **English:**  This demo read data from DB, and build mail content in processor, and send mail in writer.
 
 
+### com.official.demo16
+从txt文件读取的每一行，都可以根据*号模糊匹配各自定义分词器Tokenizer，组装成不同的对象。
+<br/>
+**English:**  Read data from txt file, and per line can have itself Tokenizer, can build different Object, see:
+<br/>
+ com.official.demo16_multilineJob.run.BuildStep.getPatternMatchingCompositeLineTokenizer()
+ <br/>
+        Map<String, LineTokenizer> map = new HashMap<>();
+        map.put("BEGIN\*",beginRecordTokenizer); // 行头匹配分词器Tokenizer
+        map.put("END\*",endRecordTokenizer);  // 行尾匹配分词器Tokenizer
+        map.put("\*",tradeRecordTokenizer);  // 匹配成Trade对象
+
     $ end
