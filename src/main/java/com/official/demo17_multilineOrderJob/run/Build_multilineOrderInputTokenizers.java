@@ -9,8 +9,11 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * build spring-batch\spring-batch-samples\src\main\resources\jobs\multilineOrderInputTokenizers.xml
+ */
 @Configuration
-public class BuildOrderFileTokenizer {
+public class Build_multilineOrderInputTokenizers {
     @Bean("orderFileTokenizer")
     public PatternMatchingCompositeLineTokenizer getPatternMatchingCompositeLineTokenizer(){
         DelimitedLineTokenizer headerRecordTokenizer = new DelimitedLineTokenizer();

@@ -131,4 +131,16 @@ JobFlowBuilder can build decision and which step, If decision return status as F
         map.put("END\*",endRecordTokenizer);  // 行尾匹配分词器Tokenizer
         map.put("\*",tradeRecordTokenizer);  // 匹配成Trade对象
 
+
+### com.official.demo17
+从txt文件读取的每一行，都可以根据一定规则定义自己的分词器Tokenizer，组装成不同的对象，参考Build_multilineOrderInputTokenizers.java
+<br/>
+**English:**  Read data from txt file, and per line can have itself Tokenizer, can build different Object, see Build_multilineOrderInputTokenizers.java
+
+
+
+
+
+
+
     $ end
