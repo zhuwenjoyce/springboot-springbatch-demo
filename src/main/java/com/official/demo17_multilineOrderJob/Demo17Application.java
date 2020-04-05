@@ -13,7 +13,10 @@ import org.springframework.context.annotation.ComponentScan;
  * https://github.com/spring-projects/spring-batch
  *
  * this demo 例子来自于：
- * spring-batch-samples/src/main/resources/jobs/multilineOrderJob.xml
+ * spring-batch-samples/src/main/resources/jobs/multilineOrderJob.xml - 主xml
+ * spring-batch-samples/src/main/resources/jobs/multilineOrderInputTokenizers.xml - 副xml
+ * spring-batch-samples/src/main/resources/jobs/multilineOrderOutputAggregators.xml - 副xml
+ * spring-batch-samples/src/main/resources/jobs/multilineOrderValidator.xml - 副xml
  *
  */
 @SpringBootApplication
