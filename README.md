@@ -137,6 +137,21 @@ JobFlowBuilder can build decision and which step, If decision return status as F
 <br/>
 **English:**  Read data from txt file, and per line can have itself Tokenizer, can build different Object, see Build_multilineOrderInputTokenizers.java
 
+### com.official.demo18
+参考BuildStep_loading.java的taskExecutor：
+为每个任务触发一个新线程的实现，异步地执行它。
+支持通过“concurrencyLimit”bean属性限制并发线程。默认情况下，并发线程的数量是无限的。
+注意:此实现不重用线程!考虑一个线程池TaskExecutor实现，特别是为执行大量的短期任务。
+<br/>
+**English:**  See taskExecutor in BuildStep_loading.java:
+<br/>
+implementation that fires up a new Thread for each task, executing it asynchronously.
+ Supports limiting concurrent threads through the "concurrencyLimit" bean property. By default, the number of concurrent threads is unlimited.
+
+NOTE: This implementation does not reuse threads!</b> 
+Consider a thread-pooling TaskExecutor implementation instead, in particular for executing a large number of short-lived tasks.
+
+
 
 
 

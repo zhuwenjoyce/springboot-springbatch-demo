@@ -60,7 +60,12 @@ public class BuildStep_loading {
         itemProcessor.setDataSource(oracleDataSource);
 
         TradeWriter tradeWriter = new TradeWriter();
-        tradeWriter.setDao(new JdbcTradeDao());
+        tradeWriter.setDao(tradeDao);
+
+        //为每个任务触发一个新线程的实现，异步地执行它。
+        //支持通过“concurrencyLimit”bean属性限制并发线程。默认情况下，并发线程的数量是无限的。
+        //注意:此实现不重用线程!考虑一个线程池TaskExecutor实现，特别是为执行大量的短期任务。
+        SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
 
         SimpleStepBuilder simpleStepBuilder = this.stepBuilderFactory.get("loadingStep")
                 .<String, String>chunk(1);  // commit-interval="2"
@@ -68,7 +73,7 @@ public class BuildStep_loading {
                 .reader(itemReader)
                 .processor(itemProcessor)
                 .writer(tradeWriter)
-                .taskExecutor(new SimpleAsyncTaskExecutor())
+                .taskExecutor(taskExecutor)
                 .build();
 
         return taskletStep;

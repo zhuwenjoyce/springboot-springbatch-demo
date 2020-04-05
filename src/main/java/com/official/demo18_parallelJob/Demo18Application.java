@@ -15,6 +15,10 @@ import org.springframework.context.annotation.ComponentScan;
  * this demo 例子来自于：
  * spring-batch-samples/src/main/resources/jobs/parallelJob.xml
  *
+ * com.official.demo18_parallelJob.run.BuildStep_loading:
+ *          //为每个任务触发一个新线程的实现，异步地执行它。
+ *         //支持通过“concurrencyLimit”bean属性限制并发线程。默认情况下，并发线程的数量是无限的。
+ *         //注意:此实现不重用线程!考虑一个线程池TaskExecutor实现，特别是为执行大量的短期任务。
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.global", "com.official.demo18_parallelJob"})

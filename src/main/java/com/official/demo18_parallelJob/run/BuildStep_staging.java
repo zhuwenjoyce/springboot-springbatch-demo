@@ -40,7 +40,7 @@ public class BuildStep_staging {
     @Bean("fileItemReader")
     public FlatFileItemReader getFlatFileItemReader(){
 
-        String fileName = "data/demo18/ImportTradeDataStep.txt";
+        String fileName = "data/demo18/TradeDataStep.txt";
         ClassPathResource inputResource = new ClassPathResource(fileName, this.getClass().getClassLoader());
         if(!inputResource.exists() || !inputResource.isReadable()){
             logger.error(fileName+" file is not exists or is not readable.");
