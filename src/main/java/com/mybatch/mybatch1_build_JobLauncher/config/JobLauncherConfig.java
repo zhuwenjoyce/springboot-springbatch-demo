@@ -1,4 +1,4 @@
-package com.mybatch.mybatch1.config;
+package com.mybatch.mybatch1_build_JobLauncher.config;
 
 import org.springframework.batch.core.configuration.support.MapJobRegistry;
 import org.springframework.batch.core.explore.support.SimpleJobExplorer;

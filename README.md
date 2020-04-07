@@ -73,7 +73,7 @@ reader和writer可以在用自定义类里的指定方法去实现。
 <br/>
 
 ### com.official.demo9
-定义处理第一行header和最后一行footer的处理类。
+定义处理第一行header和最后一行footer的处理类。SummaryFooterCallback监听step执行前和执行后。
 <br/>
 **English:**  header and footer of writer.
 <br/>

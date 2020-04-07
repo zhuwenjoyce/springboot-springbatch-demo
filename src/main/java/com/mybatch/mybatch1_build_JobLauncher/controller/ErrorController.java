@@ -1,4 +1,4 @@
-package com.mybatch.mybatch1.controller;
+package com.mybatch.mybatch1_build_JobLauncher.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

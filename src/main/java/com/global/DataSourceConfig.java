@@ -91,7 +91,12 @@ public class DataSourceConfig {
 		DefaultPointcutAdvisor pointcutAdvisor = new DefaultPointcutAdvisor();
 		pointcutAdvisor.setAdvice(txAdvice);
 		AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-		pointcut.setExpression("execution (* com.official.*.*.*(..))");
+		String expression = "( execution (* com.official.*.*.*(..)) )" +
+				" || " +
+				"( execution (* com.mybatch.*.*.*(..)) )" +
+				" || " +
+				"( execution (* com.howtodoinjava.*.*.*(..)) )";
+		pointcut.setExpression(expression);
 		pointcutAdvisor.setPointcut(pointcut);
 		return pointcutAdvisor;
 	}
